@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flexbox Display</title>
+    <link rel="stylesheet" href="HLC_A2.css">
+</head>
+<body>
+    
+    <form class="cuadro" id="flexForm">
+        <h1> Flexbox Display</h1> <br>
+        <label for="flexDirection">flex-direction:</label>
+        <select id="flexDirection">
+            <option selected value="row">row</option>
+            <option value="column">column</option>
+        </select>
+        <label for="justifyContent">flex-content:</label>
+        <select id="justifyContent">
+            <option selected value="flex-start">flex-start</option>
+            <option value="center">center</option> 
+            <option value="space-between">space-between</option>   
+            <option value="space-around">space-around</option>   
+            <option value="space-evenly">space-evenly</option>   
+        </select>
+        <label for="alignItems">align-lines:</label> 
+        <select id="alignItems">
+            <option value="stretch">stretch</option>
+            <option value="flex-end">flex-end</option>
+            <option value="center">center</option>
+            <option value="baseline">baseline</option>
+        </select>
+        <label for="flexWrap">flex-wrap:</label>
+        <select id="flexWrap">
+            <option value="nowrap" selected>nowrap</option>
+            <option value="wrap">wrap</option>
+            <option value="wrap-reverse">wrap-reverse</option>
+        </select>
+    </form>
+        <div class="flexContainer" id="flexContainer">
+            <div id="item1" class="item"><p>Div 1</p></div> <br>
+            <div id="item2" class="item"><p>Div 2</p></div> <br>
+            <div id="item3" class="item"><p>Div 3</p></div> <br>
+        </div> <br>
+        
+        <h3>Controles para Div 1</h3>
+        <label for="width1">width:</label>
+        <input type="text" id="width1"  placeholder="Ej. 100px" > 
+        <label for="height1">height:</label>
+        <input type="text" id="height1"  placeholder="Ej. 100px" > <br><br>
+        <label for="order1">order:</label>
+        <input type="number" id="order1"  value="0" > <br><br>
+    
+        <h3>Controles para Div 2</h3>
+
+        <label for="width2">width:</label>
+        <input type="text" id="width2"  placeholder="Ej. 100px" > 
+        <label for="height2">height:</label>
+        <input type="text" id="height2"  placeholder="Ej. 100px" > <br><br>
+        <label for="order2">order:</label>
+        <input type="number" id="order2"  value="0" > <br><br>
+
+        <h3>Controles para Div 3</h3>
+
+        <label for="width3">width:</label>
+        <input type="text" id="width3"  placeholder="Ej. 100px" > 
+        <label for="height3">height:</label>
+        <input type="text" id="height3"  placeholder="Ej. 100px" > <br><br>
+        <label for="order3">order:</label>
+        <input type="number" id="order3"  value="0" > <br><br>
+    
+
+<script>
+    const flexForm = document.getElementById('flexForm');
+    const flexContainer = document.getElementById('flexContainer');
+    const items = document.querySelectorAll('.item');
+
+    // Cambiar propiedades del contenedor
+    flexForm.addEventListener('change', function() {
+        const direction = document.getElementById('flexDirection').value;
+        const justify = document.getElementById('justifyContent').value;
+        const align = document.getElementById('alignItems').value;
+        const wrap = document.getElementById('flexWrap').value;
+
+        flexContainer.style.flexDirection = direction;
+        flexContainer.style.justifyContent = justify;
+        flexContainer.style.alignItems = align;
+        flexContainer.style.flexWrap = wrap;
+    });
+
+    // Función para aplicar cambios a cada div
+    function applyStyles() {
+        items.forEach((item, index) => {
+            const width = document.getElementById(`width${index + 1}`).value;
+            const height = document.getElementById(`height${index + 1}`).value;
+            const order = document.getElementById(`order${index + 1}`).value;
+
+            if (width) {
+                item.style.width = width;
+            }
+            if (height) {
+                item.style.height = height;
+            }
+            if (order) {
+                item.style.order = order;
+            }
+        });
+    }
+
+    // Añadir event listeners a los inputs de cada div
+    for (let i = 1; i <= items.length; i++) {
+        document.getElementById(`width${i}`).addEventListener('input', applyStyles);
+        document.getElementById(`height${i}`).addEventListener('input', applyStyles);
+        document.getElementById(`order${i}`).addEventListener('input', applyStyles);
+    }
+</script>
+
+</body>
+</html>
